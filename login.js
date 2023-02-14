@@ -1,5 +1,10 @@
-const formulaireLogin = document.querySelector(".login");
+// message erreur DOM
+const loginElements = document.querySelector(".erreur-login");
+const loginElement = document.createElement('p');
+loginElements.appendChild(loginElement);
 
+// ecoute submit formulaire login
+const formulaireLogin = document.querySelector(".login");
 formulaireLogin.addEventListener("submit", async function (event) {
 
     event.preventDefault();
@@ -7,7 +12,7 @@ formulaireLogin.addEventListener("submit", async function (event) {
     // Création de l’objet du login
     const login = {
         email: event.target.querySelector("[name=email]").value,
-        password: event.target.querySelector("[name=mot-de-passe]").value,
+        password: event.target.querySelector("[name=password]").value,
     };
 
     // Création de la charge utile au format JSON
@@ -20,25 +25,32 @@ formulaireLogin.addEventListener("submit", async function (event) {
         headers: { "Content-Type": "application/json" },
         body: chargeUtile
     })
-    .then(reponse => {
-        console.log(reponse.status)
-        // mettre condition avant return si code 400 pas de return et message erreur
-        return reponse.json()
-    })
-    .then(function(reponseToken){
+    .then(response => {
         
-        if(reponseToken.token){
-            sessionStorage.setItem('token',reponseToken.token);
-            document.location.href="index.html";
-
-            console.log(reponseToken.token)  // test
+        if (response.status === 200){
+            return response.json()
         }
-        else{
-            const loginElements = document.querySelector(".erreur-login");
-            loginElements.innerHTML="";
-            const loginElement = document.createElement('p');
-            loginElement.innerText="Erreur d' Authentification . ";
-            loginElements.appendChild(loginElement);
+        else if(response.status === 401){
+            loginElement.innerText="Mot de passe invalide. ";
+            document.getElementById('password').value=""
+            document.getElementById('password').focus()
+            return response.json()
+        }
+        else if(response.status === 404){
+            loginElement.innerText="Email inconnu.";
+            document.getElementById('password').value=""
+            document.getElementById('email').value=""
+            document.getElementById('email').focus()
+            return response.json()
+        }
+    })
+
+    .then(function(responseToken){
+        
+        if(responseToken.token){
+            sessionStorage.setItem('token',responseToken.token);
+            document.location.href="index.html";
+            console.log(responseToken.token)  // test
         }
     })
     .catch(error =>{
