@@ -28,13 +28,13 @@ function logout(){
     })
 }
 
-// Mode Edition
+// Mode Edition ----------------------------------------------------------------------------------------
 
 const adminToken = sessionStorage.getItem('token');
 if (!adminToken){
     logout();
 }
-else {
+else { /* passage en mode édition */
 
     document.querySelectorAll('.admin').forEach(a => {
         a.style.display=null;
@@ -46,13 +46,12 @@ else {
     document.getElementById('header').style.marginTop="100px"
     })
 
-    // click logout
+    // ecoute logout
     document.querySelector('.logout').addEventListener("click", function(){  
     logout();
     });
     
     // gestion de la fenetre modale
-
     modale(categories,generationProjets);
 }
 

@@ -1,4 +1,9 @@
-
+/**
+ *  Gestion de la fenetre Modale et de ses contenus
+ * @param {object} categories liste des catégories
+ * @param {function} generationProjets mise à jour de la liste des projets dans le DOM de la page
+ * principale et dans la fenetre modale
+ */
 export function modale(categories, generationProjets){
         
     
@@ -11,17 +16,12 @@ export function modale(categories, generationProjets){
     const delGallery = document.querySelector(".del-gallery")
     const modalButton = document.querySelector(".modal-button")
     
-    const modalContent1Appel = function(){
-        modalContent1()
-    }
-
-    const modalContent2Appel= function(){
-        modalContent2(categories)
-    }
-    
     // ouverture et fermeture de la fenetre modale 
     modalTriggers.forEach(trigger => trigger.addEventListener("click", toggleModal))
 
+    /**
+     * gère l'ouverture et la fermeture de la fenetre modale
+     */
     function toggleModal(){
         modalContainer.classList.toggle("active")
         if (modalContainer.classList.contains('active')){
@@ -37,17 +37,22 @@ export function modale(categories, generationProjets){
         }
     }
 
-
-    // Contenu Modale : Gallerie photo ------------------------------------------------
-    
+    /**
+     * Génère le contenu html de la fenetre modale avec les vignettes de projets
+     * Gère la suppression de projets
+     * gére l'envoi vers la fenetre modale ajouter projet
+     */
     async function modalContent1(){
 
         let projets = await generationProjets()
         
-        // vers modale 2
-        modalButton.addEventListener("click", modalContent2Appel)
+        // ecoute bouton ajouter une photo vers modalcontent2
+       
+        modalButton.addEventListener("click", function(){
+            modalContent2(categories)
+        })
         
-        // creation de la modale
+        // creation du contenu html de la modale
 
         modalBody.innerHTML="";
         document.querySelector('.fa-arrow-left').style.display='none'
@@ -85,12 +90,10 @@ export function modale(categories, generationProjets){
         };
 
         // suppression d'un projet
-        
         document.querySelectorAll('.fa-trash-can').forEach(a => {
             a.addEventListener('click', async function(event){
                 
                 // requete fetch
-
                 await fetch(`http://localhost:5678/api/works/${a.dataset.id}`, {
                 method: "DELETE",
                 headers: { 
@@ -111,14 +114,17 @@ export function modale(categories, generationProjets){
         })
     }
     
-    // Contenu Modale : Ajout photo ------------------------------------------------
-
+    /**
+     * Génère le code de la fenetre modale pour l'ajout d'un projet
+     * Gère l'envoi d'un nouveau projet vers l'api
+     * @param {object} categories liste des catégories pour le input select du formulaire
+     */
     function modalContent2(categories){
 
         // Retour sur fenetre modale 1
         const modalBack = document.querySelector('.fa-arrow-left')
         modalBack.style.display=null
-        modalBack.addEventListener('click', modalContent1Appel)
+        modalBack.addEventListener('click', modalContent1)
 
         // creation de la modale
 
@@ -163,6 +169,11 @@ export function modale(categories, generationProjets){
         formPhoto.setAttribute('size', '4024')
         formPhoto.setAttribute('name', 'image')
 
+        // ecoute du bouton ajouter une photo
+        modalPhotoElementBouton.addEventListener('click',function(event){
+            formPhoto.click()
+        })
+        
         // affichage de la photo dans le formulaire
         formPhoto.onchange = () => {
             modalImage.src = URL.createObjectURL(formPhoto.files[0])
@@ -193,7 +204,6 @@ export function modale(categories, generationProjets){
             modalSelect.appendChild(modalSelectOption)
         }
         
-        
         const modalBorder = document.createElement('div')
         modalBorder.className='border-top'
         const modalSubmit = document.createElement('input')
@@ -216,16 +226,15 @@ export function modale(categories, generationProjets){
         modalBody.appendChild(modalForm)
         
         // formulaire
-        
         const formAjoutPhoto = document.querySelector('.form-add-picture')
 
-        // verification du formulaire
-
+        // ecoute de la modication du formulaire
         formAjoutPhoto.addEventListener('input', function(){
            
             const choixImage = modalImage.src
             const choixTitre = document.querySelector("[name=titre]").value
 
+            // verification de la presence d'une photo et d'un titre
             if (choixImage && choixTitre){
                 modalSubmit.style.backgroundColor='#1d6154'
                 modalSubmit.disabled = 0   
@@ -237,11 +246,6 @@ export function modale(categories, generationProjets){
         })
 
         // submit du formulaire
-
-        modalPhotoElementBouton.addEventListener('click',function(event){
-            formPhoto.click()
-        })
-
         formAjoutPhoto.addEventListener("submit", async function (event) {
 
             event.preventDefault();
@@ -266,14 +270,11 @@ export function modale(categories, generationProjets){
                 if(response.ok){
                     generationProjets()
                     toggleModal()
-                    //modalContent1Appel()
                 }
                 })
             .catch(error =>{
                 console.error(error)
-            })
-            
-            
+            }) 
 
         })
     }

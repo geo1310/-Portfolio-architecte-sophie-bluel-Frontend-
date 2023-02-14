@@ -1,15 +1,17 @@
-import { generationProjets } from "./projets.js";
+/*
+    Récupère la liste des catégories dans l'api
+    génère le code html des filtres pour le tri des projets sur la page principale
+    chaque bouton filtre possède un dataset contenant l' Id de sa catégorie
+
+    retoune la liste des catégories
+
+*/
 
 export async function gestionCategories(){
 
-    // recuperation des categories
+    // recuperation des categories dans l'api
     const reponseCategories = await fetch('http://localhost:5678/api/categories/');
     const categories = await reponseCategories.json();
-
-     //recuperation des projets
-     const reponseProjets = await fetch('http://localhost:5678/api/works/');
-     const projets = await reponseProjets.json();
-    
     
     // génération des boutons filtres categories
 
@@ -23,7 +25,5 @@ export async function gestionCategories(){
         filtresElements.appendChild(boutonElement);
     }
 
-    
-    return categories
-    
+    return categories    
 }
