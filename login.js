@@ -1,4 +1,4 @@
-// message erreur DOM
+// message erreur  DOM
 const loginElements = document.querySelector(".erreur-login");
 const loginElement = document.createElement('p');
 loginElements.appendChild(loginElement);
@@ -26,6 +26,8 @@ formulaireLogin.addEventListener("submit", async function (event) {
         body: chargeUtile
     })
     .then(response => {
+
+        console.log(response)
         
         if (response.status === 200){
             return response.json()

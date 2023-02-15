@@ -72,6 +72,7 @@ export function modale(categories, generationProjets){
             const imageProjet = document.createElement("img");
             imageProjet.src = projet.imageUrl;
             imageProjet.alt = projet.title;
+            imageProjet.ariaLabel=projet.title;
             imageProjet.className='image-vignette'
             const trashProjet = document.createElement('i')
             trashProjet.className="fa-regular fa-trash-can"
@@ -104,9 +105,13 @@ export function modale(categories, generationProjets){
                 if (response.ok){
                     modalContent1()
                 }
+                else{
+                    console.log(response)
+                }
                 })
             .catch(error =>{
                 console.error(error)
+                window.alert("Serveur injoignable.");
             })
 
 
@@ -271,8 +276,12 @@ export function modale(categories, generationProjets){
                     generationProjets()
                     toggleModal()
                 }
+                else{
+                    console.log(response)
+                }
                 })
             .catch(error =>{
+                window.alert("Serveur injoignable.");
                 console.error(error)
             }) 
 
