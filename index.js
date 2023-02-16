@@ -20,13 +20,13 @@ function logout(){
     const adminElements = document.querySelectorAll('.admin');
     for(const adminElement of adminElements){
         adminElement.style.display="none";
-        document.getElementById('header').style.marginTop="50px"
-    }
-    document.querySelector('.edition-mode').style.display='none'
+        document.getElementById('header').style.marginTop="50px";
+    };
+    document.querySelector('.edition-mode').style.display='none';
     document.querySelectorAll('.non-admin').forEach(a => {
         a.style.display=null;
-    })
-}
+    });
+};
 
 // Mode Edition ----------------------------------------------------------------------------------------
 
@@ -38,13 +38,13 @@ else { /* passage en mode édition */
 
     document.querySelectorAll('.admin').forEach(a => {
         a.style.display=null;
-    })
-    document.querySelector('.edition-mode').style.display=null
+    });
+    document.querySelector('.edition-mode').style.display=null;
 
     document.querySelectorAll('.non-admin').forEach(a => {
         a.style.display='none';
-    document.getElementById('header').style.marginTop="100px"
-    })
+    document.getElementById('header').style.marginTop="100px";
+    });
 
     // ecoute logout
     document.querySelector('.logout').addEventListener("click", function(){  
@@ -53,7 +53,7 @@ else { /* passage en mode édition */
     
     // gestion de la fenetre modale
     modale(categories,generationProjets);
-}
+};
 
 // ecoute des boutons filtres categories 
 
@@ -61,7 +61,7 @@ const filtresElementsBoutons = document.querySelectorAll(".filtres button");
 
 for (let elementBouton of filtresElementsBoutons) {
     elementBouton.addEventListener("click", async function (e) {
-        projets = await generationProjets()
+        projets = await generationProjets();
         const filtreCategoryId = e.target.dataset.id;
 
         if (filtreCategoryId !== "0"){
@@ -71,11 +71,11 @@ for (let elementBouton of filtresElementsBoutons) {
             generationProjets(projetsFiltres);
         }
         else{
-            generationProjets()
-        }
+            generationProjets();
+        };
 
     });
-}
+};
 
 
 

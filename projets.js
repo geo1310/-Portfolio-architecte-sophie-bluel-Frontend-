@@ -7,13 +7,13 @@
 
 export async function generationProjets(projetFiltres=null){
 
-    let projets = projetFiltres
+    let projets = projetFiltres;
 
     //recuperation des projets si pas de projets filtres
     if(!projetFiltres){
         const reponseProjets = await fetch('http://localhost:5678/api/works/');
         projets = await reponseProjets.json();
-    }
+    };
     
     //
     const galleryElements = document.querySelector(".gallery");
@@ -37,6 +37,6 @@ export async function generationProjets(projetFiltres=null){
         
     };
 
-    return projets
+    return projets;
 
 };

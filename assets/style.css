@@ -479,6 +479,12 @@ footer nav ul {
 	font-size: 10px;
 	color: #444;
 }
+.modal-message{
+	font-weight: 700;
+	text-align: center;
+	margin-top: 20px;
+	color: #a7a7a7;
+}
 
 
 

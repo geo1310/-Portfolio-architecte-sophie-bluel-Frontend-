@@ -23,7 +23,7 @@ export async function gestionCategories(){
         boutonElement.innerText = categorie.name;
 
         filtresElements.appendChild(boutonElement);
-    }
+    };
 
-    return categories    
-}
+    return categories; 
+};

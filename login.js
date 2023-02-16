@@ -26,38 +26,35 @@ formulaireLogin.addEventListener("submit", async function (event) {
         body: chargeUtile
     })
     .then(response => {
-
-        console.log(response)
         
         if (response.status === 200){
-            return response.json()
+            return response.json();
         }
         else if(response.status === 401){
             loginElement.innerText="Mot de passe invalide. ";
-            document.getElementById('password').value=""
-            document.getElementById('password').focus()
-            return response.json()
+            document.getElementById('password').value="";
+            document.getElementById('password').focus();
+            return response.json();
         }
         else if(response.status === 404){
             loginElement.innerText="Email inconnu.";
-            document.getElementById('password').value=""
-            document.getElementById('email').value=""
-            document.getElementById('email').focus()
-            return response.json()
-        }
-    })
+            document.getElementById('password').value="";
+            document.getElementById('email').value="";
+            document.getElementById('email').focus();
+            return response.json();
+        };
+    });
 
     .then(function(responseToken){
         
         if(responseToken.token){
             sessionStorage.setItem('token',responseToken.token);
             document.location.href="index.html";
-            console.log(responseToken.token)  // test
-        }
+        };
     })
     .catch(error =>{
-        console.error(error)
-    })
+        console.error(error);
+    });
 
 });
 
