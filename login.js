@@ -42,7 +42,7 @@ formulaireLogin.addEventListener("submit", async function (event) {
             document.getElementById('email').value="";
             document.getElementById('email').focus();
             return response.json();
-        };
+        }
     })
 
     .then(function(responseToken){
@@ -54,6 +54,7 @@ formulaireLogin.addEventListener("submit", async function (event) {
     })
     .catch(error =>{
         console.error(error);
+        window.alert("Serveur injoignable.");
     });
 
 });
