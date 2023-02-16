@@ -43,7 +43,7 @@ formulaireLogin.addEventListener("submit", async function (event) {
             document.getElementById('email').focus();
             return response.json();
         };
-    });
+    })
 
     .then(function(responseToken){
         
