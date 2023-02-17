@@ -10,7 +10,7 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/6d52193b89.js" crossorigin="anonymous"></script>
-	<script type="module" src="index.js" defer></script>
+	<script type="module" src="index.js"></script>
 	
 </head>
 <body>
@@ -32,7 +32,7 @@
 	</nav>
 </header>
 <main>
-	<section id="introduction">
+	<div id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
 			<div class="admin edit-photo-introduction" style="display: none;">
@@ -50,7 +50,7 @@
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
-	</section>
+	</div>
 	<section id="portfolio">
 		<h2>
 			Mes Projets
@@ -90,11 +90,10 @@
 
 <div class="modal-container">
 	<div class="overlay modal-trigger"></div>
-	<div class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="title-modal">
-		<i aria-label="back modal" class="fa-sharp fa-solid fa-arrow-left"></i>
-		<i aria-label="close modal" class="fa-solid fa-xmark modal-trigger"></i>
-		<div class="modal-header">
-			<h1 id="title-modal"></h1>
+	<div class="modal" aria-hidden="true" role="dialog" aria-modal="false">
+		<i class="fa-sharp fa-solid fa-arrow-left"></i>
+		<i class="fa-solid fa-xmark modal-trigger"></i>
+		<div id="modal-header">
 		</div>
 		<div class="modal-body">
 		</div>

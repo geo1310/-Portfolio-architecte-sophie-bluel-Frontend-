@@ -9,7 +9,8 @@ export function modale(categories, generationProjets){
     
     // declaration variables
     const modal = document.querySelector('.modal');
-    const titleModalText =document.getElementById('title-modal');
+    const modalHeader =document.getElementById('modal-header');
+    const titleModal = document.createElement('h1');
     const modalBody = document.querySelector(".modal-body");
     const modalContainer = document.querySelector(".modal-container");
     const modalTriggers = document.querySelectorAll(".modal-trigger");
@@ -55,9 +56,13 @@ export function modale(categories, generationProjets){
         // creation du contenu html de la modale
 
         modalBody.innerHTML="";
+        modalHeader.innerHTML="";
+
         document.querySelector('.fa-arrow-left').style.display='none';
         document.querySelector('.modal-footer').style.display=null;
-        titleModalText.innerText="Galerie photo";
+        
+        titleModal.innerText="Galerie photo";
+        titleModal.className='title-modal'
         modalButton.innerText="Ajouter une photo";
         delGallery.style.display=null;
         modalButton.className='modal-button';
@@ -86,6 +91,7 @@ export function modale(categories, generationProjets){
             projetElements.appendChild(trashProjet);
             projetElements.appendChild(boutonProjet);
             // rattachement au DOM
+            modalHeader.appendChild(titleModal);
             modalBody.appendChild(projetElements);   
             
         };
@@ -133,7 +139,7 @@ export function modale(categories, generationProjets){
 
         modalBody.innerHTML="";
         document.querySelector('.modal-footer').style.display='none';
-        titleModalText.innerText="Ajout photo";
+        titleModal.innerText="Ajout photo";
         delGallery.style.display = 'none';
 
         // creation des elements de la modale

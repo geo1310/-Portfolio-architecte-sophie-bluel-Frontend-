@@ -327,7 +327,7 @@ footer nav ul {
 .fa-xmark:hover, .fa-arrow-left:hover{
 	color: #B1663C;
 }
-#title-modal{
+.title-modal{
 	font-family: 'Work Sans',sans-serif;
 	color: black;
 	font-size: 26px;
