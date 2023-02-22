@@ -15,7 +15,7 @@ export async function generationProjets(projetFiltres=null){
         projets = await reponseProjets.json();
     };
     
-    //
+    // Construction du DOM et rattachement des elements pour l'affichage
     const galleryElements = document.querySelector(".gallery");
     galleryElements.innerHTML="";
 

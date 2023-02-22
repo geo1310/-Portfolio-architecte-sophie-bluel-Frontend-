@@ -17,7 +17,7 @@ export function modale(categories, generationProjets){
     const delGallery = document.querySelector(".del-gallery");
     const modalButton = document.querySelector(".modal-button");
     
-    // ouverture et fermeture de la fenetre modale 
+    // ouverture et fermeture de la fenetre modale -------------------------------------------------
     modalTriggers.forEach(trigger => trigger.addEventListener("click", toggleModal));
 
     /**
@@ -98,10 +98,10 @@ export function modale(categories, generationProjets){
 
         // suppression d'un projet
         document.querySelectorAll('.fa-trash-can').forEach(a => {
-            a.addEventListener('click', async function(event){
+            a.addEventListener('click', function(event){
                 
                 // requete fetch
-                await fetch(`http://localhost:5678/api/works/${a.dataset.id}`, {
+                fetch(`http://localhost:5678/api/works/${a.dataset.id}`, {
                 method: "DELETE",
                 headers: { 
                     "Authorization": `Bearer ${sessionStorage.getItem('token')}`
@@ -261,7 +261,7 @@ export function modale(categories, generationProjets){
         });
 
         // submit du formulaire
-        formAjoutPhoto.addEventListener("submit", async function (event) {
+        formAjoutPhoto.addEventListener("submit", function (event) {
 
             event.preventDefault();
 
@@ -274,7 +274,7 @@ export function modale(categories, generationProjets){
 
             // requete fetch
             
-            await fetch("http://localhost:5678/api/works", {
+            fetch("http://localhost:5678/api/works", {
                 method: "POST",
                 headers: { 
                     "Authorization": `Bearer ${sessionStorage.getItem('token')}`,

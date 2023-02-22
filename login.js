@@ -1,11 +1,19 @@
-// message erreur  DOM
+/**
+ * Module gérant le formulaire login 
+ * Construit la requete fetch et l'envoie vers l'API
+ * Analyse la reponse de l'Api
+ * Affiche les erreurs
+ * Recoit le token bearer et le stocke
+ */
+
+// message erreur reponse API  DOM
 const loginElements = document.querySelector(".erreur-login");
 const loginElement = document.createElement('p');
 loginElements.appendChild(loginElement);
 
 // ecoute submit formulaire login
 const formulaireLogin = document.querySelector(".login");
-formulaireLogin.addEventListener("submit", async function (event) {
+formulaireLogin.addEventListener("submit", function (event) {
 
     event.preventDefault();
 
@@ -15,20 +23,20 @@ formulaireLogin.addEventListener("submit", async function (event) {
         password: event.target.querySelector("[name=password]").value,
     };
 
-    // Création de la charge utile au format JSON
+    // Création de la charge utile en chaine json
     const chargeUtile = JSON.stringify(login);
 
-    // Appel de la fonction fetch
+    // Envoie de la requete reseau, attente et analyse de la reponse (promesse)
 
-    await fetch("http://localhost:5678/api/users/login", {
+    fetch("http://localhost:5678/api/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: chargeUtile
     })
-    .then(response => {
+    .then(response => { // on resout la promesse envoyée par fetch
         
         if (response.status === 200){
-            return response.json();
+            return response.json(); // on retourne le corps de la reponse en json
         }
         else if(response.status === 401){
             loginElement.innerText="Mot de passe invalide. ";
@@ -44,7 +52,6 @@ formulaireLogin.addEventListener("submit", async function (event) {
             return response.json();
         }
     })
-
     .then(function(responseToken){
         
         if(responseToken.token){

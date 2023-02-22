@@ -1,12 +1,25 @@
+/**
+ * Module Central Appelé par la page principale du site
+ * Gére la 1ere génération des projets
+ * Gére la génération des boutons filtres par catégories
+ * 
+ * Il vérifie la presence d'un token pour entrer en mode edition
+ * Gére le Logout du mode edition , écoute du logout
+ * 
+ * Gestion des filtres pour un affichage des projets par categories, ecoute des boutons filtres
+ * 
+ * Appel du module de gestion de la fenetre modale
+ */
+
 import { generationProjets } from "./projets.js";
 import { gestionCategories } from "./categories.js";
 import { modale } from "./modale.js";
 
 // 1ere génération des projets ----------------------------------------------------------------------------------
 
-let projets = await generationProjets();
+await generationProjets();
 
-// Récupération des Catégories
+// génération des boutons filtres et Récupération des Catégories
 
 const categories = await gestionCategories();
 
@@ -61,7 +74,7 @@ const filtresElementsBoutons = document.querySelectorAll(".filtres button");
 
 for (let elementBouton of filtresElementsBoutons) {
     elementBouton.addEventListener("click", async function (e) {
-        projets = await generationProjets();
+        const projets = await generationProjets();
         const filtreCategoryId = e.target.dataset.id;
 
         if (filtreCategoryId !== "0"){
